@@ -1,0 +1,137 @@
+GIT
+  remote: git://github.com/collectiveidea/delayed_job.git
+  revision: 4513aeea6f6a182a4bb2eff5dfd3f998a23da5ff
+  specs:
+    delayed_job (2.1.4)
+      activesupport (~> 3.0)
+      daemons
+
+GIT
+  remote: git://github.com/collectiveidea/delayed_job_mongoid.git
+  revision: a334d0a5e75075eb8457942b6a681fd60bc4dce6
+  specs:
+    delayed_job_mongoid (1.0.2)
+      delayed_job (~> 2.1.1)
+      mongoid (~> 2.0.0.rc)
+
+GIT
+  remote: git://github.com/geemus/fog.git
+  revision: 34f8c03ceca5adce9c910dffaf850400d6562154
+  specs:
+    fog (0.5.3)
+      builder
+      excon (>= 0.5.5)
+      formatador (>= 0.0.16)
+      json
+      mime-types
+      net-ssh (>= 2.0.23)
+      nokogiri (>= 1.4.4)
+      ruby-hmac
+
+GIT
+  remote: git://github.com/jnicklas/carrierwave.git
+  revision: 5fd2c171ffc49d6cd2b11f7a81b3569d6b021bd7
+  specs:
+    carrierwave (0.5.2)
+      activesupport (~> 3.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionmailer (3.0.4)
+      actionpack (= 3.0.4)
+      mail (~> 2.2.15)
+    actionpack (3.0.4)
+      activemodel (= 3.0.4)
+      activesupport (= 3.0.4)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.13)
+      rack-test (~> 0.5.7)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.4)
+      activesupport (= 3.0.4)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activerecord (3.0.4)
+      activemodel (= 3.0.4)
+      activesupport (= 3.0.4)
+      arel (~> 2.0.2)
+      tzinfo (~> 0.3.23)
+    activeresource (3.0.4)
+      activemodel (= 3.0.4)
+      activesupport (= 3.0.4)
+    activesupport (3.0.4)
+    arel (2.0.8)
+    bson (1.2.2)
+    bson_ext (1.2.2)
+    builder (2.1.2)
+    daemons (1.1.0)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    excon (0.5.6)
+    formatador (0.0.16)
+    haml (3.0.25)
+    i18n (0.5.0)
+    json (1.5.1-x86-mingw32)
+    mail (2.2.15)
+      activesupport (>= 2.3.6)
+      i18n (>= 0.4.0)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.16)
+    mini_magick (3.2)
+      subexec (~> 0.0.4)
+    mongo (1.2.2)
+      bson (>= 1.2.2)
+    mongoid (2.0.0.rc.7)
+      activemodel (~> 3.0)
+      mongo (~> 1.2)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
+    net-ssh (2.1.0)
+    nokogiri (1.4.4.1-x86-mingw32)
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-mount (0.6.13)
+      rack (>= 1.0.0)
+    rack-test (0.5.7)
+      rack (>= 1.0)
+    rails (3.0.4)
+      actionmailer (= 3.0.4)
+      actionpack (= 3.0.4)
+      activerecord (= 3.0.4)
+      activeresource (= 3.0.4)
+      activesupport (= 3.0.4)
+      bundler (~> 1.0)
+      railties (= 3.0.4)
+    railties (3.0.4)
+      actionpack (= 3.0.4)
+      activesupport (= 3.0.4)
+      rake (>= 0.8.7)
+      thor (~> 0.14.4)
+    rake (0.8.7)
+    ruby-hmac (0.4.0)
+    subexec (0.0.4)
+    thor (0.14.6)
+    treetop (1.4.9)
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.24)
+    will_paginate (3.0.pre2)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  bson_ext (~> 1.2)
+  carrierwave!
+  delayed_job!
+  delayed_job_mongoid!
+  fog!
+  haml
+  mini_magick
+  mongoid (= 2.0.0.rc.7)
+  rails (= 3.0.4)

@@ -1,0 +1,9 @@
+Test app using :
+
+- Ruby 1.9.2 + Rails 3.0.4
+- MongoDB as database and MongoID as mapper
+- HAML as the template engine, with some translations in English and Spanish using I18n
+- jQuery instead of Prototype to handle the AJAX requests and stuff
+- CarrierWave + Fog to process and upload files to the Amazon S3 server
+- Delayed Job to run the upload of files asynchronously in the background
+

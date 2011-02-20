@@ -1,0 +1,46 @@
+# Archivo de localizacion para Español. Agregar mas archivos en este directorio para otros lenguajes.
+
+es:
+  clients:
+    list:
+      title: 'Listado de Clientes'
+      new_client: 'Agregar Nuevo Cliente'
+      empty: 'No Se Encontraron Clientes'
+    new:
+      title: 'Nuevo Cliente'
+    edit:
+      title: 'Editar Cliente'
+    show:
+      title: 'Cliente'
+    form:
+      remove_avatar: 'Remover Avatar'
+      id_type: 'Tipo de Identificacion'
+      id_number: 'Numero de Identificacion'
+      first_name: 'Nombres'
+      last_name: 'Apellidos'
+      birthday: 'Fecha de Nacimiento'
+      gender: 'Sexo'
+      country: 'Pais'
+      county: 'Departamento'
+      city: 'Ciudad'
+  actions: 'Acciones'
+  back: 'Atras'
+  search: 'Buscar'
+  edit: 'Editar'
+  show: 'Ver'
+  destroy: 'Borrar'
+  are_you_sure: 'Esta seguro ?'
+  blank_option: 'Seleccione'
+  date:
+    formats:
+      default: '%d/%m%Y'
+      short: '%b %d'
+      long: '%B %d, %Y'
+    day_names: [Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado]
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+  order:
+    - :day
+    - :month
+    - :year

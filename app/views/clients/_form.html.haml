@@ -1,0 +1,114 @@
+- unless ( @id_types )
+  - @id_types = IdType.all.order_by(:name.asc)
+- unless ( @genders )
+  - @genders = Gender.all.order_by(:name.asc)
+- unless ( @countries )
+  - @countries = Country.all.order_by(:name.asc)
+- unless ( @counties )
+  - if ( @client.country.instance_of?(Country) )
+    - @counties = @client.country.counties
+  - else
+    - @counties = []
+- unless ( @cities )
+  - if ( @client.county.instance_of?(County) rescue false )
+    - @cities = @client.county.cities
+  - else
+    - @cities = []
+= form_for( @client, { :html => { :multipart => true } } ) do |f|
+  - if ( @client.errors.any? )
+    #errorExplanation
+      %h2= "#{pluralize(@client.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @client.errors.full_messages.each do |msg|
+        %li= msg
+  .field
+    = f.label( :avatar, 'Avatar' )
+    %br
+    - if ( @client.avatar? )
+      %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
+        = image_tag( @client.avatar_url( :thumb ) )
+      = f.check_box( :remove_avatar ) + ' ' + t('.remove_avatar')
+      %br
+    = f.file_field( :avatar )
+    = f.hidden_field( :avatar_cache )
+  .field
+    = f.label( :remote_avatar_url, 'or Avatar URL' )
+    %br
+    = f.text_field( :remote_avatar_url )
+  .field
+    = f.label( :id_type_id, t('.id_type') )
+    %br
+    = f.select( :id_type_id, @id_types.collect { |c| [c.name, c.id] }, { :include_blank => t('blank_option') } )
+  .field
+    = f.label( :id_number, t('.id_number') )
+    %br
+    = f.text_field( :id_number )
+  .field
+    = f.label( :first_name, t('.first_name') )
+    %br
+    = f.text_field( :first_name )
+  .field
+    = f.label( :last_name, t('.last_name') )
+    %br
+    = f.text_field( :last_name )
+  .field
+    = f.label( :birthday, t('.birthday') )
+    %br
+    = f.date_select( :birthday, { :start_year => 1980, :end_year => 2011, :order => [ :day, :month, :year ], :include_blank => t('blank_option') } )
+  .field
+    = f.label( :gender_id, t('.gender') )
+    %br
+    = f.select( :gender_id, @genders.collect { |c| [c.name, c.id] }, { :include_blank => t('blank_option') } )
+  .field
+    = f.label( :country_id, t('.country') )
+    %br
+    = f.select( :country_id, @countries.collect { |c| [c.name, c.id] }, { :include_blank => t('blank_option') } )
+  .field
+    = f.label( :county_id, t('.county') )
+    %br
+    = f.select( :county_id, @counties.collect { |c| [c.name, c.id] }, { :include_blank => t('blank_option') }, { :disabled => ( @counties.blank? ) } )
+  .field
+    = f.label( :city_id, t('.city') )
+    %br
+    = f.select( :city_id, @cities.collect { |c| [c.name, c.id] }, { :include_blank => t('blank_option') }, { :disabled => ( @cities.blank? ) } )
+  .actions
+    = f.submit
+- content_for(:bottom) do
+  = javascript_include_tag('jquery/jquery.cascade.js')
+  = javascript_include_tag('jquery/jquery.cascade.ext.js')
+  = javascript_include_tag('jquery/jquery.templating.js')
+- content_for(:document_ready) do
+  :erb
+    jQuery('#client_county_id').cascade('#client_country_id', {
+      ajax : {
+        url : '<%= update_clients_counties_and_cities_path %>',
+        data : {
+          get : 'counties'
+        }
+      },
+      template : commonTemplate,
+      match : commonMatch
+    }).bind('loaded.cascade', function( e, target ) {
+      var jThis = jQuery(this);
+      
+      if ( jThis.html() == '' ) { jThis.attr('disabled', 'disabled'); }
+      jThis.prepend('<option value="" selected="selected"><%= t('blank_option') %></option>');
+      jThis.find("option:first")[0].selected = true;
+    });
+    
+    jQuery('#client_city_id').cascade('#client_county_id', {
+      ajax : {
+        url : '<%= update_clients_counties_and_cities_path %>',
+        data : {
+          get : 'cities'
+        }
+      },
+      template : commonTemplate,
+      match : commonMatch
+    }).bind('loaded.cascade', function( e, target ) {
+      var jThis = jQuery(this);
+      
+      if ( jThis.html() == '' ) { jThis.attr('disabled', 'disabled'); }
+      jThis.prepend('<option value="" selected="selected"><%= t('blank_option') %></option>');
+      jThis.find("option:first")[0].selected = true;
+    });

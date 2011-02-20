@@ -1,0 +1,31 @@
+- content_for(:head_title) do
+  = t('.title')
+%h1= t '.title'
+%p
+  = link_to( t('back'), clients_path ) + '|'
+  = link_to( t('edit'), edit_client_path(@client) ) + '|'
+  = link_to( t('destroy'), @client, :confirm => t('are_you_sure'), :method => :delete )
+%dl
+  - if ( @client.avatar? )
+    %dt= 'Avatar'
+    %dd
+      %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
+        = image_tag( @client.avatar_url( :main ) )
+  %dt= Client.human_attribute_name :identification_number
+  %dd= @client.id_type.name
+  %dt= Client.human_attribute_name :id_number
+  %dd= @client.id_number
+  %dt= Client.human_attribute_name :first_name
+  %dd= @client.first_name
+  %dt= Client.human_attribute_name :last_name
+  %dd= @client.last_name
+  %dt= Client.human_attribute_name :birthday
+  %dd= @client.birthday
+  %dt= Client.human_attribute_name :gender
+  %dd= @client.gender.name
+  %dt= Client.human_attribute_name :country
+  %dd= @client.country.name
+  %dt= Client.human_attribute_name :county
+  %dd= @client.county.name
+  %dt= Client.human_attribute_name :city
+  %dd= @client.city.name

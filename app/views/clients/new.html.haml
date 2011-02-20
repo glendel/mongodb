@@ -1,0 +1,5 @@
+- content_for(:head_title) do
+  = t('.title')
+%h1= t('.title')
+%p= link_to(t('back'), clients_path)
+= render({:partial => 'clients/form'})

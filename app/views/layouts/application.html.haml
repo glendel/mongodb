@@ -1,0 +1,63 @@
+!!! 5
+%html{:lang => I18n.locale}
+  %head
+    %meta{'http-equiv' => 'X-UA-Compatible', :content => 'IE=EmulateIE7'}
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8'}
+    %title= yield(:head_title)
+    /[if IE]
+      = javascript_include_tag('http://html5shiv.googlecode.com/svn/trunk/html5.js')
+    %meta{:name => 'author', :content => 'Glendel J. Fyne'}
+    %meta{:name => 'contact', :content => 'glendeljfyne@gmail.com'}
+    = csrf_meta_tag
+    = stylesheet_link_tag('jquery/jquery.lightbox')
+    = stylesheet_link_tag('scaffold')
+    = stylesheet_link_tag('application')
+    - stylesheets_path = File.join(RAILS_ROOT, 'public', 'stylesheets')
+    - stylesheet_for_controller = File.join(stylesheets_path, "#{controller_name}.css")
+    - stylesheet_for_action = File.join(stylesheets_path, controller_name, "#{action_name}.css")
+    - if ( File.exist?(stylesheet_for_controller) )
+      = stylesheet_link_tag("#{controller_name}")
+    - if ( File.exist?(stylesheet_for_action) )
+      = stylesheet_link_tag("#{controller_name}/#{action_name}")
+    = yield(:head)
+  %body
+    #glocal_container.global_container
+      %header#header.header
+        = render({:partial => 'layouts/header'})
+      #content.content
+        = render({:partial => 'layouts/content'})
+      %footer#footer.footer
+        = render({:partial => 'layouts/footer'})
+  = javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js')
+  = javascript_include_tag('jquery/jquery.lightbox')
+  = javascript_include_tag(:defaults)
+  - javascripts_path = File.join(RAILS_ROOT, 'public', 'javascripts')
+  - javascript_for_controller = File.join(javascripts_path, "#{controller_name}.js")
+  - javascript_for_action = File.join(javascripts_path, controller_name, "#{action_name}.js")
+  - if ( File.exist?(javascript_for_controller) )
+    = javascript_include_tag("#{controller_name}")
+  - if ( File.exist?(javascript_for_action) )
+    = javascript_include_tag("#{controller_name}/#{action_name}")
+  = yield(:bottom)
+  :javascript
+    jQuery(document).ready(function( $ ) {
+      var jQueryUiUrl = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js';
+      
+      $.getScript(jQueryUiUrl, function( data, textStatus ) {
+        #{yield(:document_ready_ui)}
+      });
+      
+      $('a[rel="lightbox"]').lightbox({
+        imageClickClose : false
+      });
+      
+      #{yield(:document_ready)}
+    }).bind('mousedown', {}, function( eventObject ) {
+      
+    }).bind('keydown', {}, function( eventObject ) {
+      
+    });
+    
+    jQuery(window).load(function( eventObject ) {
+      #{yield(:window_load)}
+    });

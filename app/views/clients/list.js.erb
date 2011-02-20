@@ -1,0 +1,5 @@
+<%- if ( @clients.blank? ) -%>
+  jQuery('#clients').html('<td colspan="10"><%= t('.empty') %> for : "<%= params[:search] %>"</td>');
+<%- else -%>
+  jQuery('#clients').html('<%= escape_javascript(render(@clients)) %>');
+<%- end -%>

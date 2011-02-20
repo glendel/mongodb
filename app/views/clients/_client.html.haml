@@ -1,0 +1,19 @@
+%tr{ :class => cycle( :odd, :even ) }
+  - if ( client.avatar? )
+    %td
+      %a{ :href => client.avatar_url, :rel => 'lightbox', :title => client.full_name }
+        = image_tag( client.avatar_url( :thumb ) )
+  - else
+    %td
+  %td= client.id_type.name
+  %td= client.id_number
+  %td= client.first_name
+  %td= client.last_name
+  %td= client.birthday
+  %td= client.gender.name
+  %td= client.country.name
+  %td= client.county.name
+  %td= client.city.name
+  %td.action= link_to( t('show'), client )
+  %td.action= link_to( t('edit'), edit_client_path(client) )
+  %td.action= link_to( t('destroy'), client, :confirm => t('are_you_sure'), :method => :delete )
