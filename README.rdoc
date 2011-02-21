@@ -1,6 +1,6 @@
 = Test Application
 
-This app was created to test {Ruby 1.9.2}[http://www.ruby-lang.org/], {Rails 3.0.4}[http://rubyonrails.org/] and some of the newest releases of the most useful gems.
+This app was created to test {Ruby 1.9.2}[http://www.ruby-lang.org/], {Rails 3.0.4}[http://rubyonrails.org/] and some of the newest releases of most useful gems.
 
 NOTE : I am still working on this README file in order to cover all the details related to the test.
 
@@ -20,17 +20,17 @@ NOTE : I am still working on this README file in order to cover all the details 
 
 == Getting Started
 
-Download and install {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/], the {MongoDB 1.6.5}[http://www.mongodb.org/downloads] and install the latest gems needed using the "bundle" command :
+Download and install {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/], the {MongoDB 1.6.5}[http://www.mongodb.org/downloads] and install the latest gems needed using the {bundle}[https://github.com/carlhuda/bundler] command :
 
     [sudo] bundle install
 
 NOTE : Windows users will need to install {DevKit}[http://rubyinstaller.org/downloads/] in order to be able to install some gems ( like BSON ), and also need to avoid paths with spaces for the above installations ( believe me, this will save you headaches ).
 
-In order to create the indexes needed by "delayed_job"
+In order to create the indexes needed by "delayed_job" lets run :
 
     script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
 
-Do not forget to modify the "config/initializers/carrierwave.rb" file with your own "s3_access_key_id", "s3_secret_access_key", and "s3_bucket" in order to give access to "carrierwave" to the Amazon S3 server, and the "config/mongoid.yml" file to fit your database settings.
+Do not forget to modify the "config/initializers/carrierwave.rb" file with your own "s3_access_key_id", "s3_secret_access_key", and "s3_bucket" in order to give access to "CarrierWave" to the Amazon S3 server, and the "config/mongoid.yml" file to fit your database settings.
 
 NOTE : Refer to the "Gemfile", the "config/application.rb" and the "config/routes.rb" files and the "config/locales" folder for extra configurations.
 
@@ -42,6 +42,7 @@ Lets load some feeds into our database in order to have some data to play with t
 
 == Useful Railcasts
 
+* {Episode 201 - Bundler}[http://railscasts.com/episodes/201-bundler]
 * {Episode 238 - MongoID}[http://railscasts.com/episodes/238-mongoid]
 * {Episode 205 - Unobtrusive Javascript}[http://railscasts.com/episodes/205-unobtrusive-javascript]
 * {Episode 253 - CarrierWave File Uploads}[http://railscasts.com/episodes/253-carrierwave-file-uploads]
