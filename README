@@ -1,9 +1,57 @@
-Test app using :
+= Test Application
 
-- Ruby 1.9.2 + Rails 3.0.4
-- MongoDB as database and MongoID as mapper
-- HAML as the template engine, with some translations in English and Spanish using I18n
-- jQuery instead of Prototype to handle the AJAX requests and stuff
-- CarrierWave + Fog to process and upload files to the Amazon S3 server
-- Delayed Job to run the upload of files asynchronously in the background
+This app was created to test {Ruby 1.9.2}[http://www.ruby-lang.org/], {Rails 3.0.4}[http://rubyonrails.org/] and some of the newest releases of the most useful gems.
 
+NOTE : I am still working on this README file in order to cover all the details related to the test.
+
+== Used Tools
+
+* {Ruby 1.9.2}[http://www.ruby-lang.org/] + {Rails 3.0.4}[http://rubyonrails.org/]
+* {MongoDB}[http://www.mongodb.org/] as database and {MongoID}[http://mongoid.org/] as mapper
+* {BSON}[http://bsonspec.org/] to accelerate the Ruby BSON serialization, used by {MongoDB}[http://www.mongodb.org/display/DOCS/BSON] as the data storage and network transfer format for "documents"
+* {HAML}[http://haml-lang.com/] as the template engine, with some translations in English and Spanish using {I18n}[http://guides.rubyonrails.org/i18n.html]
+* {jQuery}[http://jquery.com/] + {jquery-ujs}[https://github.com/rails/jquery-ujs] ( jQuery.rails.js ) instead of Prototype to handle the AJAX requests and stuff
+* {jQuery Cascade}[http://dev.chayachronicles.com/jquery/cascade/index.html] is a plugin for "jquery" used to handle dependencies between several drop down lists
+* {jQuery Lightbox}[https://github.com/krewenki/jquery-lightbox] a quite simple plugin to display nicely the uploaded images
+* {CarrierWave}[https://github.com/jnicklas/carrierwave/] + {Fog}[https://github.com/geemus/fog] to process and upload files to the Amazon S3 server
+* {MiniMagick}[https://github.com/probablycorey/mini_magick] as the image processing library used by "CarrierWave" to process the uploaded images
+* {ImageMagick}[http://www.imagemagick.org/] is used by "MiniMagick" to process the images.
+* {Delayed Job}[https://github.com/collectiveidea/delayed_job] + {delayed_job_mongoid}[https://github.com/collectiveidea/delayed_job_mongoid] to run the upload of files asynchronously in the background
+
+== Getting Started
+
+Download and install {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/], the {MongoDB 1.6.5}[http://www.mongodb.org/downloads] and install the latest gems needed using the "bundle" command :
+
+    [sudo] bundle install
+
+NOTE : Windows users will need to install {DevKit}[http://rubyinstaller.org/downloads/] in order to be able to install some gems ( like BSON ), and also need to avoid paths with spaces for the above installations ( believe me, this will save you headaches ).
+
+In order to create the indexes needed by "delayed_job"
+
+    script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
+
+Do not forget to modify the "config/initializers/carrierwave.rb" file with your own "s3_access_key_id", "s3_secret_access_key", and "s3_bucket" in order to give access to "carrierwave" to the Amazon S3 server, and the "config/mongoid.yml" file to fit your database settings.
+
+NOTE : Refer to the "Gemfile", the "config/application.rb" and the "config/routes.rb" files and the "config/locales" folder for extra configurations.
+
+== Quick Start
+
+Lets load some feeds into our database in order to have some data to play with the dependent drop down lists. So lets run :
+
+    rake db:seed
+
+== Useful Railcasts
+
+* {Episode 238 - MongoID}[http://railscasts.com/episodes/238-mongoid]
+* {Episode 205 - Unobtrusive Javascript}[http://railscasts.com/episodes/205-unobtrusive-javascript]
+* {Episode 253 - CarrierWave File Uploads}[http://railscasts.com/episodes/253-carrierwave-file-uploads]
+* {Episode 171 - Delayed Job}[http://railscasts.com/episodes/171-delayed-job]
+* {Episode 179 - Seed Data}[http://railscasts.com/episodes/179-seed-data]
+
+== Getting Help
+
+* Please feel free to contact me for any issue or doubt, but please remember that this is just a test and not a full production app, so wait issues.
+
+== Thanks to
+
+* {Trevor Turk}[http://trevorturk.com/] who helped me to solve an issue storing several versions with "CarrierWave" on the "Amazon S3" server on a "Windows" machine ( {Issue 220}[https://github.com/jnicklas/carrierwave/issues/220/] )
