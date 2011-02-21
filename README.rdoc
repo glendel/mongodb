@@ -2,13 +2,14 @@
 
 This app was created to test {Ruby 1.9.2}[http://www.ruby-lang.org/], {Rails 3.0.4}[http://rubyonrails.org/] and some of the newest releases of most useful gems.
 
-NOTE : I am still working on this README file in order to cover all the details related to the test.
+NOTE : Even though I have tried to make this document as clear and user friendly as possible, it is needed some previous knowledge about Ruby, Rails and its gems.
+TMP NOTE : I am still working on this README file in order to cover all the details related to the test.
 
 == Used Tools
 
 * {Ruby 1.9.2}[http://www.ruby-lang.org/] + {Rails 3.0.4}[http://rubyonrails.org/]
 * {MongoDB}[http://www.mongodb.org/] as database and {MongoID}[http://mongoid.org/] as mapper
-* {BSON}[http://bsonspec.org/] to accelerate the Ruby BSON serialization, used by {MongoDB}[http://www.mongodb.org/display/DOCS/BSON] as the data storage and network transfer format for "documents"
+* {BSON}[http://bsonspec.org/] + {bson_ext}[http://rubygems.org/gems/bson_ext] to accelerate the Ruby BSON serialization, used by {MongoDB}[http://www.mongodb.org/display/DOCS/BSON] as the data storage and network transfer format for "documents"
 * {HAML}[http://haml-lang.com/] as the template engine, with some translations in English and Spanish using {I18n}[http://guides.rubyonrails.org/i18n.html]
 * {jQuery}[http://jquery.com/] + {jquery-ujs}[https://github.com/rails/jquery-ujs] ( jQuery.rails.js ) instead of Prototype to handle the AJAX requests and stuff
 * {jQuery Cascade}[http://dev.chayachronicles.com/jquery/cascade/index.html] is a plugin for "jquery" used to handle dependencies between several drop down lists
@@ -20,7 +21,7 @@ NOTE : I am still working on this README file in order to cover all the details 
 
 == Getting Started
 
-Download and install {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/], the {MongoDB 1.6.5}[http://www.mongodb.org/downloads] and install the latest gems needed using the {bundle}[https://github.com/carlhuda/bundler] command :
+Download and install {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/], the {MongoDB 1.6.5}[http://www.mongodb.org/downloads] and install the latest version for the needed gems using the {bundle}[https://github.com/carlhuda/bundler] command ( please refer to the "{Gemfile}[https://github.com/glendel/mongodb/blob/master/Gemfile]" for more details about the used gems ) :
 
     [sudo] bundle install
 
@@ -29,6 +30,8 @@ NOTE : Windows users will need to install {DevKit}[http://rubyinstaller.org/down
 In order to create the indexes needed by "delayed_job" lets run :
 
     script/rails runner 'Delayed::Backend::Mongoid::Job.create_indexes'
+
+NOTE : Please refer to the "{delayed_job_mongoid}[https://github.com/collectiveidea/delayed_job_mongoid]" page for more information about the above command.
 
 Do not forget to modify the "config/initializers/carrierwave.rb" file with your own "s3_access_key_id", "s3_secret_access_key", and "s3_bucket" in order to give access to "CarrierWave" to the Amazon S3 server, and the "config/mongoid.yml" file to fit your database settings.
 
@@ -39,6 +42,15 @@ NOTE : Refer to the "Gemfile", the "config/application.rb" and the "config/route
 Lets load some feeds into our database in order to have some data to play with the dependent drop down lists. So lets run :
 
     rake db:seed
+
+== Useful Documentation
+
+* {Ruby Documentation}[http://www.ruby-lang.org/en/documentation/]
+* {Ruby on Rails Guides}[http://guides.rubyonrails.org/]
+* {MongoDB Documentation}[http://www.mongodb.org/display/DOCS/Home]
+* {MongoID Installation}[http://mongoid.org/docs/installation/]
+* {GridFS with Mongoid and CarrierWave on Rails 3}[http://socialmemorycomplex.net/2010/06/02/gridfs-with-mongoid-and-carrierwave-on-rails-3/]
+* {bson and bson_ext Installation}[http://www.mongodb.org/display/DOCS/Ruby+Language+Center#RubyLanguageCenter-BSON]
 
 == Useful Railcasts
 
