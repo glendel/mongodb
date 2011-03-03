@@ -1,16 +1,29 @@
 - content_for(:head_title) do
   = t('.title')
 %h1= t '.title'
+- if ( controller_name == 'carrierwave_clients' )
+  - the_clients_path = carrierwave_clients_path
+  - the_edit_client_path = edit_carrierwave_client_path(@client)
+- elsif ( controller_name == 'paperclip_clients' )
+  - the_clients_path = paperclip_clients_path
+  - the_edit_client_path = edit_paperclip_client_path(@client)
+- else
+  - the_clients_path = clients_path
+  - the_edit_client_path = edit_carrierwave_client_path(@client)
 %p
-  = link_to( t('back'), clients_path ) + '|'
-  = link_to( t('edit'), edit_client_path(@client) ) + '|'
+  = link_to( t('back'), the_clients_path ) + '|'
+  = link_to( t('edit'), the_edit_client_path ) + '|'
   = link_to( t('destroy'), @client, :confirm => t('are_you_sure'), :method => :delete )
 %dl
   - if ( @client.avatar? )
     %dt= 'Avatar'
     %dd
-      %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
-        = image_tag( @client.avatar_url( :main ) )
+      - if ( controller_name == 'paperclip_clients' )
+        %a{ :href => @client.avatar.url, :rel => 'lightbox', :title => @client.full_name }
+          = image_tag( @client.avatar.url( :main ) )
+      - else
+        %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
+          = image_tag( @client.avatar_url( :main ) )
   %dt= Client.human_attribute_name :identification_number
   %dd= @client.id_type.name
   %dt= Client.human_attribute_name :id_number

@@ -1,6 +1,8 @@
 Mongodb::Application.routes.draw do
   match 'clients/update_counties_and_cities' => 'clients#update_counties_and_cities', :as => :update_clients_counties_and_cities
   resources :clients
+  resources :carrierwave_clients
+  resources :paperclip_clients
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

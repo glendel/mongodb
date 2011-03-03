@@ -9,11 +9,20 @@ gem 'bson_ext', '~>1.2'
 # This gem provides a simple and extremely flexible way to upload files from Ruby applications.
 gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git'
 
+# This is another useful gem used to upload files from Ruby applications.
+gem 'paperclip'
+
+# "Mongoid::Paperclip" enables you to use Paperclip with the Mongoid ODM for MongoDB.
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+
 # Include "MiniMagick" as the image processing library.
 gem 'mini_magick'
 
 # Include "Fog" so "CarrierWave" can use it to support Amazon S3 as the storage place for the uploaded files.
 gem 'fog', :git => 'git://github.com/geemus/fog.git'
+
+# Include "aws/s3" so "Paperclip" can use it to support Amazon S3 as the storage place for the uploaded files.
+gem 'aws-s3'
 
 # Include "delayed_job" to based on the database run long tasks asynchronously in the background.
 # Will work with "carrierwave" to deal with the Amazon S3 storage process.
@@ -21,6 +30,9 @@ gem 'delayed_job', :git => 'git://github.com/collectiveidea/delayed_job.git'
 
 # This is the "MongoID" backend for "delayed_job".
 gem 'delayed_job_mongoid', :git => 'git://github.com/collectiveidea/delayed_job_mongoid.git'
+
+# Process your Paperclip attachments in the background with delayed_job or Resque.
+gem 'delayed_paperclip'
 
 # Include "Haml" as the template engine.
 gem 'haml'

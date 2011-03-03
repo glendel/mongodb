@@ -36,6 +36,8 @@ class ClientsController < ApplicationController
   # GET /clients/new
   # GET /clients/new.xml
   def new
+    redirect_to({:controller => 'carrierwave_clients', :action => 'new'})
+    return
     @client = Client.new
 
     respond_to do |format|

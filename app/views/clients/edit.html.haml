@@ -1,7 +1,13 @@
 - content_for(:head_title) do
   = t('.title')
+- if ( controller_name == 'carrierwave_clients' )
+  - the_clients_path = carrierwave_clients_path
+- elsif ( controller_name == 'paperclip_clients' )
+  - the_clients_path = paperclip_clients_path
+- else
+  - the_clients_path = clients_path
 %h1= t('.title')
 %p
-  = link_to( t('back'), clients_path ) + '|'
+  = link_to( t('back'), the_clients_path ) + '|'
   = link_to( t('show'), @client )
 = render({:partial => 'clients/form'})

@@ -1,0 +1,25 @@
+# Amazon S3 configuration file
+
+development:
+  access_key_id: access_key_id
+  secret_access_key: secret_access_key
+  #s3_permissions: :public_read
+  #s3_protocol: 'http'
+  #s3_headers: {'Expires' => 1.year.from_now.httpdate}
+  bucket: 'my-bucket-for-test-paperclip'
+
+test:
+  access_key_id: access_key_id
+  secret_access_key: secret_access_key
+  #s3_permissions: :public_read
+  #s3_protocol: 'http'
+  #s3_headers: {'Expires' => 1.year.from_now.httpdate}
+  bucket: 'my-bucket-for-test-paperclip'
+
+production:
+  access_key_id: access_key_id
+  secret_access_key: secret_access_key
+  #s3_permissions: :public_read
+  #s3_protocol: 'http'
+  #s3_headers: {'Expires' => 1.year.from_now.httpdate}
+  bucket: 'my-bucket-for-test-paperclip'

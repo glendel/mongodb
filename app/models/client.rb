@@ -6,6 +6,7 @@ class Client
   field :first_name, :type => String
   field :last_name, :type => String
   field :birthday, :type => Date
+  field :use_carrierwave, :type => Boolean, :default => true
   # Associations
   referenced_in :id_type
   referenced_in :gender
@@ -15,8 +16,6 @@ class Client
   # Validations
   validates_presence_of :id_type_id, :id_number, :first_name, :country_id, :county_id, :city_id
   validates_uniqueness_of :id_number
-  # Uploader
-  mount_uploader :avatar, AvatarUploader
   
   #------------------------------------------------------------------
   # Returns the full name of the client.

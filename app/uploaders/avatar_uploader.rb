@@ -1,6 +1,8 @@
 # encoding: utf-8
+require File.join(Rails.root, 'lib', 'carrierwave', 'delayed_job')
 
 class AvatarUploader < CarrierWave::Uploader::Base
+  #include CarrierWave::Delayed::Job
 
   # Include MiniMagick, RMagick or ImageScience support:
   include CarrierWave::MiniMagick

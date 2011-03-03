@@ -1,8 +1,20 @@
+- if ( client.use_carrierwave )
+  - the_edit_client_path = edit_carrierwave_client_path(client)
+- else
+  - the_edit_client_path = edit_paperclip_client_path(client)
 %tr{ :class => cycle( :odd, :even ) }
   - if ( client.avatar? )
     %td
-      %a{ :href => client.avatar_url, :rel => 'lightbox', :title => client.full_name }
-        = image_tag( client.avatar_url( :thumb ) )
+      - if ( client.use_carrierwave )
+        %a{ :href => client.avatar_url, :rel => 'lightbox', :title => client.full_name }
+          = image_tag( client.avatar_url( :thumb ) )
+        %span{ :style => 'color:blue;' }
+          Carrierwave
+      - else
+        %a{ :href => client.avatar.url, :rel => 'lightbox', :title => client.full_name }
+          = image_tag( client.avatar.url( :thumb ) )
+        %span{ :style => 'color:red;' }
+          Paperclip
   - else
     %td
   %td= client.id_type.name
@@ -15,5 +27,5 @@
   %td= client.county.name
   %td= client.city.name
   %td.action= link_to( t('show'), client )
-  %td.action= link_to( t('edit'), edit_client_path(client) )
+  %td.action= link_to( t('edit'), the_edit_client_path )
   %td.action= link_to( t('destroy'), client, :confirm => t('are_you_sure'), :method => :delete )

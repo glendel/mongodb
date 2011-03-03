@@ -5,7 +5,7 @@
 - unless ( @countries )
   - @countries = Country.all.order_by(:name.asc)
 - unless ( @counties )
-  - if ( @client.country.instance_of?(Country) )
+  - if ( @client.country.instance_of?(Country) rescue false )
     - @counties = @client.country.counties
   - else
     - @counties = []
@@ -25,16 +25,22 @@
     = f.label( :avatar, 'Avatar' )
     %br
     - if ( @client.avatar? )
-      %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
-        = image_tag( @client.avatar_url( :thumb ) )
-      = f.check_box( :remove_avatar ) + ' ' + t('.remove_avatar')
+      - if ( controller_name == 'paperclip_clients' )
+        %a{ :href => @client.avatar.url, :rel => 'lightbox', :title => @client.full_name }
+          = image_tag( @client.avatar.url( :thumb ) )
+      - else
+        %a{ :href => @client.avatar_url, :rel => 'lightbox', :title => @client.full_name }
+          = image_tag( @client.avatar_url( :thumb ) )
+        = f.check_box( :remove_avatar ) + ' ' + t('.remove_avatar')
       %br
     = f.file_field( :avatar )
-    = f.hidden_field( :avatar_cache )
-  .field
-    = f.label( :remote_avatar_url, 'or Avatar URL' )
-    %br
-    = f.text_field( :remote_avatar_url )
+    - unless ( controller_name == 'paperclip_clients' )
+      = f.hidden_field( :avatar_cache )
+  - unless ( controller_name == 'paperclip_clients' )
+    .field
+      = f.label( :remote_avatar_url, 'or Avatar URL' )
+      %br
+      = f.text_field( :remote_avatar_url )
   .field
     = f.label( :id_type_id, t('.id_type') )
     %br
@@ -78,8 +84,20 @@
   = javascript_include_tag('jquery/jquery.cascade.ext.js')
   = javascript_include_tag('jquery/jquery.templating.js')
 - content_for(:document_ready) do
+  - if ( controller_name == 'carrierwave_clients' )
+    - client_country_id = 'carrierwave_client_country_id'
+    - client_county_id = 'carrierwave_client_county_id'
+    - client_city_id = 'carrierwave_client_city_id'
+  - elsif ( controller_name == 'paperclip_clients' )
+    - client_country_id = 'paperclip_client_country_id'
+    - client_county_id = 'paperclip_client_county_id'
+    - client_city_id = 'paperclip_client_city_id'
+  - else
+    - client_country_id = 'client_country_id'
+    - client_county_id = 'client_county_id'
+    - client_city_id = 'client_city_id'
   :erb
-    jQuery('#client_county_id').cascade('#client_country_id', {
+    jQuery('#<%= client_county_id %>').cascade('#<%= client_country_id %>', {
       ajax : {
         url : '<%= update_clients_counties_and_cities_path %>',
         data : {
@@ -96,7 +114,7 @@
       jThis.find("option:first")[0].selected = true;
     });
     
-    jQuery('#client_city_id').cascade('#client_county_id', {
+    jQuery('#<%= client_city_id %>').cascade('#<%= client_county_id %>', {
       ajax : {
         url : '<%= update_clients_counties_and_cities_path %>',
         data : {
